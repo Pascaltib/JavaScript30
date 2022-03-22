@@ -21,7 +21,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root{
+      --base_var: yellow;
+      --spacing_var: 10px;
+      --blur_var: 10px;
+    }
 
+    img{
+      padding: var(--spacing_var);
+      background-color: var(--base_var);
+      filter: blur(var(--blur_var));
+    }
+
+    .hl{
+      color: var(--base_var);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -45,6 +59,16 @@
   </style>
 
   <script>
+    //Query selectorall makes a node list not an array
+    const inputs = document.querySelectorAll('.controls input');
+
+    function handleUpdate() {
+      const suffix = this.dataset.sizing || "";
+      document.documentElement.style.setProperty(`--${this.name}_var`, this.value + suffix);
+
+    }
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
 
 </body>
